@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Typing Speed Test</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-color: #f5f5f5;
+      --text-color: #222;
+      --primary-color: #4CAF50;
+      --secondary-color: #ffffff;
+      --border-color: #ddd;
+    }
+
+    [data-theme="dark"] {
+      --bg-color: #121212;
+      --text-color: #000000;
+      --primary-color: #4CAF50;
+      --secondary-color: #1e1e1e;
+      --border-color: #333;
+    }
+
+    [data-theme="dark"] h1 {
+      color: #ffffff;
+    }
+    
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      background-color: var(--secondary-color);
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      width: 90%;
+      max-width: 800px;
+      transition: background 0.3s;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .text-display {
+      font-family: 'Fira Code', monospace;
+      background-color: #f0f0f0;
+      padding: 1rem;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+      min-height: 100px;
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+      color: var(--text-color);
+      overflow-wrap: break-word;
+      transition: background 0.3s;
+    }
+
+    .text-display.correct {
+      border-left: 5px solid limegreen;
+    }
+
+    .text-display.wrong {
+      border-left: 5px solid red;
+    }
+
+    textarea {
+      width: 100%;
+      padding: 1rem;
+      font-size: 1rem;
+      border: 2px solid var(--border-color);
+      border-radius: 6px;
+      resize: none;
+      font-family: inherit;
+      height: 130px;
+      transition: border-color 0.3s;
+    }
+
+    button {
+      padding: 0.8rem 1.5rem;
+      margin: 0.5rem 0.25rem;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      background-color: var(--primary-color);
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #3c9443;
+    }
+
+    .timer {
+      text-align: center;
+      font-size: 1.25rem;
+      margin-top: 1rem;
+      color: #ff5722;
+    }
+
+    .results {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .results div {
+      background-color: #e0e0e0;
+      color: #000;
+      flex: 1;
+      min-width: 100px;
+      padding: 1rem;
+      border-radius: 6px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .progress-bar-container {
+      margin-top: 1rem;
+      height: 20px;
+      background: #ddd;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: var(--primary-color);
+      transition: width 0.3s ease-in-out;
+    }
+
+    .theme-toggle {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+    }
+  </style>
+</head>
+<body data-theme="light">
+  <div class="theme-toggle">
+    <button onclick="toggleTheme()">🌙 Toggle Dark</button>
+  </div>
+
+  <div class="container">
+    <h1>Typing Speed Test</h1>
+    <div id="test-text" class="text-display"></div>
+    <textarea id="typing-area" placeholder="Start typing here..." disabled></textarea>
+    <div class="progress-bar-container">
+      <div class="progress-bar" id="progress-bar"></div>
+    </div>
+    <div style="text-align: center;">
+      <button id="start-button">Start Test</button>
+      <button id="reset-button" style="display: none;">Try Again</button>
+    </div>
+    <div class="timer" id="timer">Time: 0 seconds</div>
+    <div class="results">
+      <div>Speed: <span id="wpm">0</span> WPM</div>
+      <div>Accuracy: <span id="accuracy">0</span>%</div>
+      <div>Time: <span id="time">0</span> seconds</div>
+    </div>
+  </div>
+
+  <script>
+    function toggleTheme() {
+      const current = document.body.getAttribute('data-theme');
+      document.body.setAttribute('data-theme', current === 'dark' ? 'light' : 'dark');
+    }
+  </script>
+  <script src="/static/script.js"></script>
+</body>
+</html>
